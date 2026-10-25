@@ -255,59 +255,103 @@ ALTER TABLE public.dashboard_presets ENABLE ROW LEVEL SECURITY;
 -- ====================================================================
 
 -- Profiles: User can view and update own profile
+DROP POLICY IF EXISTS "Users can view own profile" ON public.profiles;
 CREATE POLICY "Users can view own profile" ON public.profiles FOR SELECT USING (auth.uid() = id);
+
+DROP POLICY IF EXISTS "Users can update own profile" ON public.profiles;
 CREATE POLICY "Users can update own profile" ON public.profiles FOR UPDATE USING (auth.uid() = id);
+
+DROP POLICY IF EXISTS "Users can insert own profile" ON public.profiles;
 CREATE POLICY "Users can insert own profile" ON public.profiles FOR INSERT WITH CHECK (auth.uid() = id);
 
 -- Workspaces: Access only if workspace member or owner
+DROP POLICY IF EXISTS "Members can view workspace" ON public.workspaces;
 CREATE POLICY "Members can view workspace" ON public.workspaces FOR SELECT USING (public.is_workspace_member(id) OR owner_id = auth.uid());
+
+DROP POLICY IF EXISTS "Users can create workspaces" ON public.workspaces;
 CREATE POLICY "Users can create workspaces" ON public.workspaces FOR INSERT WITH CHECK (auth.uid() = owner_id);
+
+DROP POLICY IF EXISTS "Owners can update workspace" ON public.workspaces;
 CREATE POLICY "Owners can update workspace" ON public.workspaces FOR UPDATE USING (owner_id = auth.uid());
+
+DROP POLICY IF EXISTS "Owners can delete workspace" ON public.workspaces;
 CREATE POLICY "Owners can delete workspace" ON public.workspaces FOR DELETE USING (owner_id = auth.uid());
 
 -- Workspace Members
+DROP POLICY IF EXISTS "Members can view membership" ON public.workspace_members;
 CREATE POLICY "Members can view membership" ON public.workspace_members FOR SELECT USING (public.is_workspace_member(workspace_id));
+
+DROP POLICY IF EXISTS "Owners can manage membership" ON public.workspace_members;
 CREATE POLICY "Owners can manage membership" ON public.workspace_members FOR ALL USING (
   EXISTS (SELECT 1 FROM public.workspaces WHERE id = workspace_id AND owner_id = auth.uid())
 );
 
 -- Projects
+DROP POLICY IF EXISTS "Members can view projects" ON public.projects;
 CREATE POLICY "Members can view projects" ON public.projects FOR SELECT USING (public.is_workspace_member(workspace_id));
+
+DROP POLICY IF EXISTS "Members can create projects" ON public.projects;
 CREATE POLICY "Members can create projects" ON public.projects FOR INSERT WITH CHECK (public.is_workspace_member(workspace_id));
+
+DROP POLICY IF EXISTS "Members can update projects" ON public.projects;
 CREATE POLICY "Members can update projects" ON public.projects FOR UPDATE USING (public.is_workspace_member(workspace_id));
+
+DROP POLICY IF EXISTS "Members can delete projects" ON public.projects;
 CREATE POLICY "Members can delete projects" ON public.projects FOR DELETE USING (public.is_workspace_member(workspace_id));
 
 -- Tasks
+DROP POLICY IF EXISTS "Members can view tasks" ON public.tasks;
 CREATE POLICY "Members can view tasks" ON public.tasks FOR SELECT USING (public.is_workspace_member(workspace_id));
+
+DROP POLICY IF EXISTS "Members can create tasks" ON public.tasks;
 CREATE POLICY "Members can create tasks" ON public.tasks FOR INSERT WITH CHECK (public.is_workspace_member(workspace_id));
+
+DROP POLICY IF EXISTS "Members can update tasks" ON public.tasks;
 CREATE POLICY "Members can update tasks" ON public.tasks FOR UPDATE USING (public.is_workspace_member(workspace_id));
+
+DROP POLICY IF EXISTS "Members can delete tasks" ON public.tasks;
 CREATE POLICY "Members can delete tasks" ON public.tasks FOR DELETE USING (public.is_workspace_member(workspace_id));
 
 -- Subtasks
+DROP POLICY IF EXISTS "Members can manage subtasks" ON public.subtasks;
 CREATE POLICY "Members can manage subtasks" ON public.subtasks FOR ALL USING (
   EXISTS (SELECT 1 FROM public.tasks t WHERE t.id = task_id AND public.is_workspace_member(t.workspace_id))
 );
 
 -- Milestones
+DROP POLICY IF EXISTS "Members can view milestones" ON public.milestones;
 CREATE POLICY "Members can view milestones" ON public.milestones FOR SELECT USING (public.is_workspace_member(workspace_id));
+
+DROP POLICY IF EXISTS "Members can manage milestones" ON public.milestones;
 CREATE POLICY "Members can manage milestones" ON public.milestones FOR ALL USING (public.is_workspace_member(workspace_id));
 
 -- Documents
+DROP POLICY IF EXISTS "Members can view documents" ON public.project_documents;
 CREATE POLICY "Members can view documents" ON public.project_documents FOR SELECT USING (public.is_workspace_member(workspace_id));
+
+DROP POLICY IF EXISTS "Members can manage documents" ON public.project_documents;
 CREATE POLICY "Members can manage documents" ON public.project_documents FOR ALL USING (public.is_workspace_member(workspace_id));
 
 -- Reminders & Notifications: User specific
+DROP POLICY IF EXISTS "Users can view own reminders" ON public.reminders;
 CREATE POLICY "Users can view own reminders" ON public.reminders FOR ALL USING (auth.uid() = user_id);
+
+DROP POLICY IF EXISTS "Users can view own notifications" ON public.notifications;
 CREATE POLICY "Users can view own notifications" ON public.notifications FOR ALL USING (auth.uid() = user_id);
 
 -- Activity Logs
+DROP POLICY IF EXISTS "Members can view activity" ON public.activity_logs;
 CREATE POLICY "Members can view activity" ON public.activity_logs FOR SELECT USING (public.is_workspace_member(workspace_id));
+
+DROP POLICY IF EXISTS "Members can insert activity" ON public.activity_logs;
 CREATE POLICY "Members can insert activity" ON public.activity_logs FOR INSERT WITH CHECK (public.is_workspace_member(workspace_id));
 
 -- User Preferences
+DROP POLICY IF EXISTS "Users can manage own preferences" ON public.user_preferences;
 CREATE POLICY "Users can manage own preferences" ON public.user_preferences FOR ALL USING (auth.uid() = user_id);
 
 -- Dashboard Presets
+DROP POLICY IF EXISTS "Users can manage own presets" ON public.dashboard_presets;
 CREATE POLICY "Users can manage own presets" ON public.dashboard_presets FOR ALL USING (auth.uid() = user_id);
 
 -- Storage bucket configuration script instruction:
