@@ -1,0 +1,25 @@
+{
+  "name": "VeroPlan — Project Management System",
+  "short_name": "VeroPlan",
+  "description": "Plan, Track, and Achieve with VeroPlan. Premium project management, Kanban boards, milestones, and 3D interactive workspace.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#22291F",
+  "theme_color": "#606B3D",
+  "icons": [
+    {
+      "src": "/logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "business", "utilities"]
+}

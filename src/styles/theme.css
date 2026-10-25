@@ -1,0 +1,127 @@
+/* Theme: Dark Olive (Default) */
+.theme-dark-olive {
+  --bg-app: #1A2017;
+  --bg-surface: #22291F;
+  --bg-card: #2B3428;
+  --bg-card-hover: #333E30;
+  --bg-card-active: #3C4838;
+  --bg-input: #1D231A;
+  --bg-sidebar: #1E251B;
+  --bg-header: rgba(34, 41, 31, 0.85);
+  --bg-overlay: rgba(14, 18, 13, 0.75);
+
+  --text-primary: #F2F4EB;
+  --text-secondary: #B7C3A8;
+  --text-muted: #828F75;
+  --text-inverse: #1E251B;
+
+  --border-subtle: rgba(200, 222, 160, 0.08);
+  --border-card: rgba(200, 222, 160, 0.14);
+  --border-strong: rgba(200, 222, 160, 0.28);
+  --border-focus: var(--accent-color);
+
+  --badge-bg: rgba(200, 222, 160, 0.12);
+  --badge-text: #C8DEA0;
+
+  --color-scheme: dark;
+}
+
+/* Theme: Light Sage */
+.theme-light-sage {
+  --bg-app: #F3F5E9;
+  --bg-surface: #E7EED8;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F8FAF2;
+  --bg-card-active: #EEF4E3;
+  --bg-input: #FFFFFF;
+  --bg-sidebar: #E3EAD3;
+  --bg-header: rgba(243, 245, 233, 0.9);
+  --bg-overlay: rgba(38, 53, 29, 0.5);
+
+  --text-primary: #26351D;
+  --text-secondary: #4A5B3D;
+  --text-muted: #728464;
+  --text-inverse: #F2F4EB;
+
+  --border-subtle: rgba(96, 107, 61, 0.12);
+  --border-card: rgba(96, 107, 61, 0.18);
+  --border-strong: rgba(96, 107, 61, 0.32);
+  --border-focus: var(--color-primary-olive);
+
+  --badge-bg: rgba(96, 107, 61, 0.12);
+  --badge-text: #48542C;
+
+  --color-scheme: light;
+}
+
+/* Theme: Custom Accent */
+.theme-custom-accent {
+  --bg-app: #1A2017;
+  --bg-surface: #22291F;
+  --bg-card: #2B3428;
+  --bg-card-hover: #333E30;
+  --bg-card-active: #3C4838;
+  --bg-input: #1D231A;
+  --bg-sidebar: #1E251B;
+  --bg-header: rgba(34, 41, 31, 0.85);
+  --bg-overlay: rgba(14, 18, 13, 0.75);
+
+  --text-primary: #F2F4EB;
+  --text-secondary: #B7C3A8;
+  --text-muted: #828F75;
+  --text-inverse: #1E251B;
+
+  --border-subtle: rgba(200, 222, 160, 0.08);
+  --border-card: rgba(200, 222, 160, 0.14);
+  --border-strong: var(--accent-color);
+  --border-focus: var(--accent-color);
+
+  --badge-bg: var(--accent-color-glow);
+  --badge-text: var(--accent-color);
+
+  --color-scheme: dark;
+}
+
+/* Density Settings */
+.density-compact {
+  --card-padding: 12px;
+  --widget-gap: 12px;
+  --item-padding-y: 6px;
+  --item-padding-x: 10px;
+  --font-size-base: 13px;
+  --header-height: 58px;
+}
+
+.density-comfortable {
+  --card-padding: 20px;
+  --widget-gap: 18px;
+  --item-padding-y: 10px;
+  --item-padding-x: 14px;
+  --font-size-base: 14px;
+  --header-height: 68px;
+}
+
+.density-spacious {
+  --card-padding: 28px;
+  --widget-gap: 24px;
+  --item-padding-y: 14px;
+  --item-padding-x: 18px;
+  --font-size-base: 15px;
+  --header-height: 76px;
+}
+
+/* Radius Settings */
+.radius-small {
+  --card-radius: 6px;
+  --control-radius: 4px;
+}
+
+.radius-medium {
+  --card-radius: 12px;
+  --control-radius: 8px;
+}
+
+.radius-large {
+  --card-radius: 20px;
+  --control-radius: 14px;
+}
