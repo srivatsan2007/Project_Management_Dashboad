@@ -165,6 +165,34 @@ This updates the web files inside Android Studio automatically.
 
 ---
 
+## 🚀 Deploying to Vercel
+
+### 1. Import Git Repository
+1. Go to [vercel.com](https://vercel.com) and log in.
+2. Click **Add New...** ➔ **Project**.
+3. Select your GitHub repository: `srivatsan2007/Project_Management_Dashboad`.
+
+### 2. Configure Environment Variables (REQUIRED)
+Before clicking **Deploy**, expand the **Environment Variables** section and add:
+
+| Key | Value Source | Example / Notes |
+|:---|:---|:---|
+| `VITE_SUPABASE_URL` | Supabase Dashboard ➔ Project Settings ➔ API ➔ Project URL | `https://your-project.supabase.co` |
+| `VITE_SUPABASE_ANON_KEY` | Supabase Dashboard ➔ Project Settings ➔ API ➔ `anon` / `public` Key | `eyJhbGciOi...` |
+
+> [!IMPORTANT]
+> Without these environment variables, the app will run in local demo mode and cannot authenticate users or sync cloud data.
+
+### 3. Deploy
+- **Framework Preset**: Vite (detected automatically)
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- Click **Deploy**!
+
+*(The included `vercel.json` ensures that direct links to `/workspace-3d`, `/projects`, `/tasks`, etc., work cleanly without 404 errors on refresh).*
+
+---
+
 ## 📦 Production Build
 
 To build the production-ready minified bundle:
