@@ -137,25 +137,31 @@ Open `http://127.0.0.1:5173/` in your browser.
 2. Tap the browser menu (or Share button on iOS) and tap **"Add to Home Screen"**.
 3. VeroPlan will install and launch as a standalone, fullscreen mobile application with the custom logo and bottom navigation.
 
-### Option B: Native Mobile App via Capacitor
-To generate native **Android APK** or **iOS Xcode** projects:
+### Option B: Native Mobile App via Android Studio (Pre-configured!)
+The native Android project is **already initialized and configured** in the `android/` directory!
+
+#### 1. Open in Android Studio
+You can open the project in Android Studio with a single command:
 ```bash
-# 1. Install Capacitor
-npm install @capacitor/core @capacitor/cli @capacitor/android @capacitor/ios
-
-# 2. Initialize Capacitor
-npx cap init VeroPlan com.veroplan.app --web-dir dist
-
-# 3. Build production web bundle
-npm run build
-
-# 4. Add Android / iOS platforms
-npx cap add android
-npx cap add ios
-
-# 5. Open in Android Studio or Xcode
-npx cap open android
+npm run cap:android
 ```
+*Or manually:*
+1. Open **Android Studio**.
+2. Click **Open** (or `File -> Open`).
+3. Select the `android` folder located at `d:\Code\ProjectHub\android`.
+4. Wait for Gradle sync to finish.
+
+#### 2. Run or Build APK
+- **To test on phone/emulator**: Connect your Android phone via USB (with USB Debugging turned ON) or start an Android Virtual Device (AVD), then click the green **▶ Run** button.
+- **To generate an APK file**: In Android Studio menu, click **Build -> Build Bundle(s) / APK(s) -> Build APK(s)**. Once built, copy the `.apk` file to your phone and install it directly!
+
+#### 3. Updating the App After Web Changes
+Whenever you change your React components or pages:
+```bash
+npm run build
+npm run cap:sync
+```
+This updates the web files inside Android Studio automatically.
 
 ---
 

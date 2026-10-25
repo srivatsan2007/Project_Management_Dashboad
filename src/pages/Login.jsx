@@ -93,7 +93,7 @@ export default function Login() {
   };
 
   const copyConfirmSql = () => {
-    const sql = `-- 1. Confirm all existing accounts immediately\nUPDATE auth.users SET email_confirmed_at = NOW(), confirmed_at = NOW() WHERE email_confirmed_at IS NULL;\n\n-- 2. Automatically confirm all future signups for any email address\nCREATE OR REPLACE FUNCTION public.auto_confirm_new_users()\nRETURNS TRIGGER AS $$\nBEGIN\n  NEW.email_confirmed_at = COALESCE(NEW.email_confirmed_at, NOW());\n  NEW.confirmed_at = COALESCE(NEW.confirmed_at, NOW());\n  RETURN NEW;\nEND;\n$$ LANGUAGE plpgsql SECURITY DEFINER;\n\nDROP TRIGGER IF EXISTS tr_auto_confirm_users ON auth.users;\nCREATE TRIGGER tr_auto_confirm_users\n  BEFORE INSERT ON auth.users\n  FOR EACH ROW\n  EXECUTE FUNCTION public.auto_confirm_new_users();`;
+    const sql = `-- 1. Confirm all existing accounts immediately\nUPDATE auth.users SET email_confirmed_at = NOW() WHERE email_confirmed_at IS NULL;\n\n-- 2. Automatically confirm all future signups for any email address\nCREATE OR REPLACE FUNCTION public.auto_confirm_new_users()\nRETURNS TRIGGER AS $$\nBEGIN\n  NEW.email_confirmed_at = COALESCE(NEW.email_confirmed_at, NOW());\n  RETURN NEW;\nEND;\n$$ LANGUAGE plpgsql SECURITY DEFINER;\n\nDROP TRIGGER IF EXISTS tr_auto_confirm_users ON auth.users;\nCREATE TRIGGER tr_auto_confirm_users\n  BEFORE INSERT ON auth.users\n  FOR EACH ROW\n  EXECUTE FUNCTION public.auto_confirm_new_users();`;
     navigator.clipboard.writeText(sql);
     setCopiedSql(true);
     setTimeout(() => setCopiedSql(false), 3000);
