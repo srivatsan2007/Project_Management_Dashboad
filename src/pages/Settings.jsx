@@ -89,7 +89,7 @@ export default function Settings() {
       </div>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', borderBottom: '1px solid var(--border-card)', gap: '8px', overflowX: 'auto' }}>
+      <div style={{ display: 'flex', borderBottom: '1px solid var(--border-card)', gap: '8px', overflowX: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: '2px' }}>
         {[
           { key: 'appearance', label: 'Appearance & Identity', icon: Palette },
           { key: 'profile', label: 'Profile & Account', icon: User },

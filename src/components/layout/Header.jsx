@@ -120,11 +120,22 @@ export default function Header({ onToggleMobileSidebar, onOpenCustomizer }) {
 
         {/* Right Side: Actions, Theme, Auth / Profile */}
         <div className="header-right">
+          {/* Mobile Search Button */}
+          <button
+            className="btn btn-ghost btn-icon mobile-search-btn"
+            onClick={() => setIsSearchOpen(true)}
+            aria-label="Search records"
+            title="Search projects, tasks, docs"
+          >
+            <Search size={18} color="var(--accent-color)" />
+          </button>
+
           {/* Quick Add Task */}
           <button
             className="btn btn-primary btn-sm"
             onClick={handleQuickAddClick}
             title="Create new task quickly"
+            aria-label="Quick Add task"
           >
             <Plus size={16} />
             <span className="hide-on-mobile">Quick Add</span>
@@ -133,12 +144,13 @@ export default function Header({ onToggleMobileSidebar, onOpenCustomizer }) {
           {/* Customize Dashboard shortcut (shows on / route) */}
           {location.pathname === '/' && onOpenCustomizer && (
             <button
-              className="btn btn-secondary btn-sm hide-on-mobile"
+              className="btn btn-secondary btn-sm"
               onClick={onOpenCustomizer}
               title="Enter Dashboard Customization mode"
+              aria-label="Customize dashboard"
             >
               <SlidersHorizontal size={15} color="var(--accent-color)" />
-              <span>Customize</span>
+              <span className="hide-on-mobile">Customize</span>
             </button>
           )}
 

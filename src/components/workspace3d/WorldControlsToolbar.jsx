@@ -23,24 +23,7 @@ export default function WorldControlsToolbar({
   onResetView = () => {},
 }) {
   return (
-    <div
-      style={{
-        position: 'absolute',
-        bottom: '20px',
-        left: '20px',
-        zIndex: 90,
-        display: 'flex',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        gap: '8px',
-        background: 'rgba(34, 41, 31, 0.88)',
-        backdropFilter: 'blur(10px)',
-        padding: '6px 12px',
-        borderRadius: 'var(--radius-md)',
-        border: '1px solid var(--border-card)',
-        boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
-      }}
-    >
+    <div className="world-controls-toolbar">
       {/* Reset Camera */}
       <button
         className="btn btn-ghost btn-sm"

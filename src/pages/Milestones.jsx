@@ -89,18 +89,8 @@ export default function Milestones() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       {/* Top Bar */}
-      <div
-        className="card"
-        style={{
-          padding: '16px 20px',
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '14px',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+      <div className="card filter-action-bar">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
           <div>
             <h2 style={{ fontSize: '1.15rem', margin: 0 }}>Milestones & Roadmap Checkpoints</h2>
             <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', margin: '2px 0 0' }}>
@@ -109,10 +99,9 @@ export default function Milestones() {
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div className="action-group">
           <select
             className="select"
-            style={{ width: 'auto' }}
             value={projectFilter}
             onChange={(e) => setProjectFilter(e.target.value)}
           >
@@ -125,7 +114,7 @@ export default function Milestones() {
           </select>
 
           <button className="btn btn-primary" onClick={handleOpenCreate}>
-            <Plus size={16} /> New Milestone
+            <Plus size={16} /> <span>New Milestone</span>
           </button>
         </div>
       </div>

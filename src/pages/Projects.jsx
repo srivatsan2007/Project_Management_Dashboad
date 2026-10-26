@@ -183,19 +183,10 @@ export default function Projects() {
       )}
 
       {/* Top Filter & Action Bar */}
-      <div
-        className="card"
-        style={{
-          padding: '16px 20px',
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '14px',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, minWidth: '280px' }}>
-          <div style={{ position: 'relative', flex: 1, maxWidth: '360px' }}>
+      {/* Top Filter & Action Bar */}
+      <div className="card filter-action-bar">
+        <div className="filter-group">
+          <div className="filter-search-box">
             <Search size={16} style={{ position: 'absolute', left: '12px', top: '10px', color: 'var(--text-muted)' }} />
             <input
               type="text"
@@ -207,7 +198,7 @@ export default function Projects() {
             />
           </div>
 
-          <select className="select" style={{ width: 'auto' }} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+          <select className="select" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
             <option value="All">All Statuses</option>
             <option value="Active">Active</option>
             <option value="Planning">Planning</option>
@@ -216,7 +207,7 @@ export default function Projects() {
             <option value="Archived">Archived</option>
           </select>
 
-          <select className="select" style={{ width: 'auto' }} value={priorityFilter} onChange={(e) => setPriorityFilter(e.target.value)}>
+          <select className="select" value={priorityFilter} onChange={(e) => setPriorityFilter(e.target.value)}>
             <option value="All">All Priorities</option>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
@@ -224,7 +215,7 @@ export default function Projects() {
             <option value="Urgent">Urgent</option>
           </select>
 
-          <select className="select" style={{ width: 'auto' }} value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <select className="select" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
             <option value="updated_at">Sort: Recently Updated</option>
             <option value="name">Sort: Name</option>
             <option value="progress">Sort: Progress %</option>
@@ -232,13 +223,14 @@ export default function Projects() {
           </select>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div className="action-group">
           <div style={{ display: 'flex', background: 'var(--bg-input)', borderRadius: 'var(--radius-md)', padding: '2px', border: '1px solid var(--border-card)' }}>
             <button
               className={`btn btn-ghost btn-icon btn-icon-sm ${viewMode === 'grid' ? 'active' : ''}`}
               style={{ background: viewMode === 'grid' ? 'var(--bg-card-hover)' : 'transparent' }}
               onClick={() => setViewMode('grid')}
               title="Grid View"
+              aria-label="Grid View"
             >
               <Grid size={15} />
             </button>
@@ -247,13 +239,14 @@ export default function Projects() {
               style={{ background: viewMode === 'list' ? 'var(--bg-card-hover)' : 'transparent' }}
               onClick={() => setViewMode('list')}
               title="List View"
+              aria-label="List View"
             >
               <ListIcon size={15} />
             </button>
           </div>
 
           <button className="btn btn-primary" onClick={handleOpenCreate}>
-            <FolderPlus size={16} /> New Project
+            <FolderPlus size={16} /> <span>New Project</span>
           </button>
         </div>
       </div>
@@ -312,7 +305,7 @@ export default function Projects() {
           </div>
         </div>
       ) : viewMode === 'grid' ? (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '18px' }}>
+        <div className="project-cards-grid">
           {filteredProjects.map((project) => {
             const progress = getProjectProgress(project.id);
             const isCompleted = project.status === 'Completed';

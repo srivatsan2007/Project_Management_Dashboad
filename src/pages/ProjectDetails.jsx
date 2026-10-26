@@ -91,7 +91,7 @@ export default function ProjectDetails() {
             </p>
           </div>
 
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <div className="action-group" style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
             {project.github_url && (
               <a href={project.github_url} target="_blank" rel="noreferrer" className="btn btn-secondary btn-sm">
                 <GitBranch size={15} /> GitHub
@@ -176,7 +176,7 @@ export default function ProjectDetails() {
 
       {/* Tab Content */}
       {activeTab === 'overview' && (
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px' }}>
+        <div className="project-overview-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '20px' }}>
           <div className="card">
             <h3 style={{ fontSize: '1.1rem', marginBottom: '10px' }}>Project Notes & Architecture</h3>
             <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>

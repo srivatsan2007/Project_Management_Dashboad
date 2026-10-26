@@ -117,7 +117,7 @@ export default function MyDay() {
       </div>
 
       {/* Main Grid: Focus Tasks & Daily Notes */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '22px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '20px' }}>
         {/* Left Column: Focus Tasks */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {/* Quick Add To My Day Form */}
@@ -127,12 +127,12 @@ export default function MyDay() {
               <input
                 type="text"
                 className="input"
-                style={{ border: 'none', background: 'transparent', padding: '6px 0', fontSize: '0.95rem' }}
-                placeholder="Add a task to focus on today (press Enter)..."
+                style={{ border: 'none', background: 'transparent', padding: '6px 0', fontSize: '0.95rem', flex: 1, minWidth: 0 }}
+                placeholder="Add a task to focus on today..."
                 value={quickTitle}
                 onChange={(e) => setQuickTitle(e.target.value)}
               />
-              <button type="submit" className="btn btn-primary btn-sm" disabled={!quickTitle.trim()}>
+              <button type="submit" className="btn btn-primary btn-sm" style={{ flexShrink: 0 }} disabled={!quickTitle.trim()}>
                 Add
               </button>
             </div>

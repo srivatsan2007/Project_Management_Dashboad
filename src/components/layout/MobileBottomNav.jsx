@@ -1,11 +1,11 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard,
   FolderKanban,
   CheckSquare,
   Sun,
-  Boxes,
+  Menu,
 } from 'lucide-react';
 import { useWorkspace } from '../../context/WorkspaceContext';
 
@@ -14,11 +14,18 @@ const BOTTOM_NAV_ITEMS = [
   { to: '/projects', label: 'Projects', icon: FolderKanban, badgeKey: 'activeProjects' },
   { to: '/tasks', label: 'Tasks', icon: CheckSquare, badgeKey: 'inProgressTasks' },
   { to: '/my-day', label: 'My Day', icon: Sun, badgeKey: 'tasksDueToday' },
-  { to: '/workspace-3d', label: '3D World', icon: Boxes },
 ];
 
-export default function MobileBottomNav() {
+export default function MobileBottomNav({ onOpenMobileMenu }) {
   const { stats } = useWorkspace();
+  const location = useLocation();
+
+  const isMoreActive = ![
+    '/',
+    '/projects',
+    '/tasks',
+    '/my-day',
+  ].some((path) => location.pathname === path || (path !== '/' && location.pathname.startsWith(path)));
 
   return (
     <nav className="mobile-bottom-nav" aria-label="Mobile Bottom Navigation">
@@ -43,6 +50,21 @@ export default function MobileBottomNav() {
           </NavLink>
         );
       })}
+
+      <button
+        type="button"
+        className={`mobile-nav-button ${isMoreActive ? 'active' : ''}`}
+        onClick={onOpenMobileMenu}
+        aria-label="Open full workspace navigation"
+      >
+        <div className="mobile-nav-icon-wrapper">
+          <Menu size={20} />
+          {stats?.pendingMilestones > 0 && (
+            <span className="mobile-nav-badge">{stats.pendingMilestones}</span>
+          )}
+        </div>
+        <span className="mobile-nav-label">More</span>
+      </button>
     </nav>
   );
 }

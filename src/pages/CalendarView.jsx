@@ -82,19 +82,9 @@ export default function CalendarView() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
       {/* Top Controls */}
-      <div
-        className="card"
-        style={{
-          padding: '16px 20px',
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '14px',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <h2 style={{ fontSize: '1.25rem', margin: 0, minWidth: '180px' }}>{monthName}</h2>
+      <div className="card filter-action-bar">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
+          <h2 style={{ fontSize: '1.25rem', margin: 0, minWidth: '160px' }}>{monthName}</h2>
           <div style={{ display: 'flex', gap: '4px' }}>
             <button className="btn btn-secondary btn-icon btn-icon-sm" onClick={prevMonth} aria-label="Previous month">
               <ChevronLeft size={16} />
@@ -108,10 +98,9 @@ export default function CalendarView() {
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div className="action-group">
           <select
             className="select"
-            style={{ width: 'auto' }}
             value={selectedProject}
             onChange={(e) => setSelectedProject(e.target.value)}
           >
@@ -183,39 +172,40 @@ export default function CalendarView() {
 
       {/* Month Grid View */}
       {viewType === 'month' ? (
-        <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
-          {/* Day of Week Headers */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(7, 1fr)',
-              textAlign: 'center',
-              background: 'var(--bg-input)',
-              borderBottom: '1px solid var(--border-card)',
-              fontWeight: 700,
-              fontSize: '0.8rem',
-              color: 'var(--text-secondary)',
-              padding: '10px 0',
-            }}
-          >
-            <div>Sun</div>
-            <div>Mon</div>
-            <div>Tue</div>
-            <div>Wed</div>
-            <div>Thu</div>
-            <div>Fri</div>
-            <div>Sat</div>
-          </div>
+        <div className="card calendar-grid-wrapper" style={{ padding: 0 }}>
+          <div className="calendar-grid-inner">
+            {/* Day of Week Headers */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(7, 1fr)',
+                textAlign: 'center',
+                background: 'var(--bg-input)',
+                borderBottom: '1px solid var(--border-card)',
+                fontWeight: 700,
+                fontSize: '0.8rem',
+                color: 'var(--text-secondary)',
+                padding: '10px 0',
+              }}
+            >
+              <div>Sun</div>
+              <div>Mon</div>
+              <div>Tue</div>
+              <div>Wed</div>
+              <div>Thu</div>
+              <div>Fri</div>
+              <div>Sat</div>
+            </div>
 
-          {/* Days Grid */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(7, 1fr)',
-              background: 'var(--border-card)',
-              gap: '1px',
-            }}
-          >
+            {/* Days Grid */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(7, 1fr)',
+                background: 'var(--border-card)',
+                gap: '1px',
+              }}
+            >
             {calendarDays.map((day, idx) => {
               const events = getEventsForDay(day);
               const dateStr = day
@@ -306,6 +296,7 @@ export default function CalendarView() {
                 </div>
               );
             })}
+            </div>
           </div>
         </div>
       ) : (

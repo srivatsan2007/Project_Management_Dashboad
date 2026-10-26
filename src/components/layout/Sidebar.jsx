@@ -15,6 +15,7 @@ import {
   ChevronRight,
   ShieldCheck,
   Boxes,
+  X,
 } from 'lucide-react';
 import { useWorkspace } from '../../context/WorkspaceContext';
 
@@ -35,6 +36,9 @@ const NAV_ITEMS = [
 export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobileOpen }) {
   const { stats, workspace } = useWorkspace();
   const location = useLocation();
+
+  // On mobile drawer mode, always show expanded text and labels
+  const isExpanded = !collapsed || mobileOpen;
 
   const toggleCollapsed = () => {
     const nextState = !collapsed;
@@ -65,7 +69,7 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
                 style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'calc(var(--radius-md) - 2px)' }}
               />
             </div>
-            {!collapsed && (
+            {isExpanded && (
               <div className="brand-text-container">
                 <span className="brand-title" style={{ letterSpacing: '-0.01em', display: 'flex', alignItems: 'baseline' }}>
                   <span>Vero</span>
@@ -77,10 +81,20 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
               </div>
             )}
           </NavLink>
+
+          {mobileOpen && (
+            <button
+              className="mobile-drawer-close-btn"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Close navigation menu"
+            >
+              <X size={18} />
+            </button>
+          )}
         </div>
 
         {/* Workspace pill when expanded */}
-        {!collapsed && workspace && (
+        {isExpanded && workspace && (
           <div
             style={{
               padding: '10px 14px',
@@ -116,12 +130,12 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
                 to={item.to}
                 className={`nav-item ${isActive ? 'active' : ''}`}
                 onClick={() => setMobileOpen(false)}
-                title={collapsed ? item.label : undefined}
+                title={!isExpanded ? item.label : undefined}
               >
                 <div className="nav-icon">
                   <Icon size={19} />
                 </div>
-                {!collapsed && (
+                {isExpanded && (
                   <>
                     <span className="nav-label">{item.label}</span>
                     {count !== null && count > 0 && (
@@ -136,13 +150,13 @@ export default function Sidebar({ collapsed, setCollapsed, mobileOpen, setMobile
 
         {/* Footer with collapse toggle button */}
         <div className="sidebar-footer">
-          {!collapsed && (
+          {isExpanded && (
             <span style={{ fontSize: '0.725rem', color: 'var(--text-muted)' }}>
               v1.0.0 • SaaS Ready
             </span>
           )}
           <button
-            className="collapse-toggle-btn"
+            className="collapse-toggle-btn hide-on-mobile"
             onClick={toggleCollapsed}
             aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
             title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}

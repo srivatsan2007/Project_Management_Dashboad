@@ -915,20 +915,7 @@ export default function Dashboard() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
       {/* Welcome Banner with 3D Visual Accent */}
-      <div
-        className="card"
-        style={{
-          background: 'linear-gradient(135deg, rgba(34, 41, 31, 0.95) 0%, rgba(44, 53, 40, 0.95) 100%)',
-          border: '1px solid var(--border-strong)',
-          overflow: 'hidden',
-          display: 'grid',
-          gridTemplateColumns: 'minmax(0, 1.6fr) minmax(220px, 1fr)',
-          alignItems: 'center',
-          gap: '20px',
-          padding: '24px 30px',
-          position: 'relative',
-        }}
-      >
+      <div className="card dashboard-welcome-banner">
         <div>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '4px 12px', borderRadius: 'var(--radius-full)', background: 'var(--badge-bg)', color: 'var(--accent-color)', fontSize: '0.75rem', fontWeight: 700, marginBottom: '12px' }}>
             <img src="/logo.jpg" alt="VeroPlan" style={{ width: '16px', height: '16px', borderRadius: '4px', objectFit: 'cover' }} />
@@ -954,7 +941,7 @@ export default function Dashboard() {
               </span>
             )}
           </p>
-          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+          <div className="dashboard-banner-actions">
             <button className="btn btn-accent btn-sm" onClick={() => navigate('/my-day')}>
               Open Today's Workspace
             </button>
@@ -968,7 +955,7 @@ export default function Dashboard() {
         </div>
 
         {/* 3D Sculpture Component */}
-        <div style={{ height: '170px', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="dashboard-sculpture-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <GeometricSculpture height={170} interactive={true} />
         </div>
       </div>

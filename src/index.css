@@ -144,8 +144,74 @@ a:hover {
 
 @media (max-width: 640px) {
   .kanban-board {
-    grid-template-columns: 1fr;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    padding-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
   }
+  .kanban-col {
+    min-width: 84vw;
+    max-width: 86vw;
+    scroll-snap-align: center;
+    flex-shrink: 0;
+    min-height: 380px;
+  }
+}
+
+/* Dashboard Welcome Banner Mobile Optimizations */
+.dashboard-welcome-banner {
+  background: linear-gradient(135deg, rgba(34, 41, 31, 0.95) 0%, rgba(44, 53, 40, 0.95) 100%);
+  border: 1px solid var(--border-strong);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(220px, 1fr);
+  align-items: center;
+  gap: 20px;
+  padding: 24px 30px;
+  position: relative;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .dashboard-welcome-banner {
+    grid-template-columns: 1fr !important;
+    padding: 20px 16px !important;
+    gap: 16px !important;
+  }
+
+  .dashboard-sculpture-container {
+    height: 140px !important;
+    width: 100% !important;
+  }
+
+  .dashboard-banner-actions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px !important;
+  }
+
+  .dashboard-banner-actions .btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .project-overview-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Calendar month grid wrapper on mobile */
+.calendar-grid-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+
+.calendar-grid-inner {
+  min-width: 580px;
 }
 
 .kanban-col {

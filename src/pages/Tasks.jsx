@@ -252,19 +252,9 @@ export default function Tasks() {
       )}
 
       {/* Top Filter and Controls Bar */}
-      <div
-        className="card"
-        style={{
-          padding: '16px 20px',
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '14px',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: 1, minWidth: '300px' }}>
-          <div style={{ position: 'relative', flex: 1, maxWidth: '340px' }}>
+      <div className="card filter-action-bar">
+        <div className="filter-group">
+          <div className="filter-search-box">
             <Search size={16} style={{ position: 'absolute', left: '12px', top: '10px', color: 'var(--text-muted)' }} />
             <input
               type="text"
@@ -276,7 +266,7 @@ export default function Tasks() {
             />
           </div>
 
-          <select className="select" style={{ width: 'auto' }} value={projectFilter} onChange={(e) => setProjectFilter(e.target.value)}>
+          <select className="select" value={projectFilter} onChange={(e) => setProjectFilter(e.target.value)}>
             <option value="All">All Projects</option>
             {projects.map((p) => (
               <option key={p.id} value={p.id}>
@@ -285,7 +275,7 @@ export default function Tasks() {
             ))}
           </select>
 
-          <select className="select" style={{ width: 'auto' }} value={priorityFilter} onChange={(e) => setPriorityFilter(e.target.value)}>
+          <select className="select" value={priorityFilter} onChange={(e) => setPriorityFilter(e.target.value)}>
             <option value="All">All Priorities</option>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
@@ -295,13 +285,14 @@ export default function Tasks() {
         </div>
 
         {/* View Switcher and Action */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div className="action-group">
           <div style={{ display: 'flex', background: 'var(--bg-input)', borderRadius: 'var(--radius-md)', padding: '2px', border: '1px solid var(--border-card)' }}>
             <button
               className={`btn btn-ghost btn-icon btn-icon-sm ${viewMode === 'kanban' ? 'active' : ''}`}
               style={{ background: viewMode === 'kanban' ? 'var(--bg-card-hover)' : 'transparent' }}
               onClick={() => setViewMode('kanban')}
               title="Kanban Board View"
+              aria-label="Kanban Board View"
             >
               <Layers size={15} />
             </button>
@@ -310,19 +301,20 @@ export default function Tasks() {
               style={{ background: viewMode === 'list' ? 'var(--bg-card-hover)' : 'transparent' }}
               onClick={() => setViewMode('list')}
               title="List View"
+              aria-label="List View"
             >
               <ListIcon size={15} />
             </button>
           </div>
 
           <button className="btn btn-primary" onClick={() => handleOpenCreate()}>
-            <Plus size={16} /> New Task
+            <Plus size={16} /> <span>New Task</span>
           </button>
         </div>
       </div>
 
       {/* Quick Filter Tabs */}
-      <div style={{ display: 'flex', gap: '8px', overflowX: 'auto' }}>
+      <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px', WebkitOverflowScrolling: 'touch' }}>
         {[
           { key: 'all', label: `All Tasks (${tasks.length})` },
           { key: 'my-day', label: `My Day (${tasks.filter((t) => t.is_my_day).length})` },

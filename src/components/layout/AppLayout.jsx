@@ -51,7 +51,7 @@ export default function AppLayout({ onOpenCustomizer }) {
         <main className="page-container">
           <Outlet />
         </main>
-        <MobileBottomNav />
+        <MobileBottomNav onOpenMobileMenu={() => setMobileOpen(true)} />
       </div>
     </div>
   );

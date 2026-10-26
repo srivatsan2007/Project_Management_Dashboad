@@ -168,7 +168,7 @@ export default function Documents() {
           </p>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
+        <div className="action-group">
           <div
             style={{
               display: 'flex',
@@ -188,39 +188,28 @@ export default function Documents() {
           </div>
 
           <button className="btn btn-primary" onClick={handleOpenUpload}>
-            <Upload size={16} /> Upload Document
+            <Upload size={16} /> <span>Upload Document</span>
           </button>
         </div>
       </div>
 
       {/* Filter Bar */}
-      <div
-        className="card"
-        style={{
-          padding: '14px 18px',
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '12px',
-        }}
-      >
-        <div style={{ position: 'relative', flex: 1, minWidth: '240px', maxWidth: '380px' }}>
-          <Search size={16} style={{ position: 'absolute', left: '12px', top: '10px', color: 'var(--text-muted)' }} />
-          <input
-            type="text"
-            className="input"
-            placeholder="Search documents by name or tag..."
-            style={{ paddingLeft: '36px' }}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
+      <div className="card filter-action-bar">
+        <div className="filter-group">
+          <div className="filter-search-box">
+            <Search size={16} style={{ position: 'absolute', left: '12px', top: '10px', color: 'var(--text-muted)' }} />
+            <input
+              type="text"
+              className="input"
+              placeholder="Search documents by name or tag..."
+              style={{ paddingLeft: '36px' }}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <select
             className="select"
-            style={{ width: 'auto' }}
             value={projectFilter}
             onChange={(e) => setProjectFilter(e.target.value)}
           >
@@ -231,13 +220,15 @@ export default function Documents() {
               </option>
             ))}
           </select>
+        </div>
 
+        <div className="action-group">
           <button
             className="btn btn-ghost btn-sm"
             onClick={() => setShowHowItWorks(true)}
             title="How document security works"
           >
-            <Info size={15} /> Learn how it works
+            <Info size={15} /> <span>Learn how it works</span>
           </button>
         </div>
       </div>

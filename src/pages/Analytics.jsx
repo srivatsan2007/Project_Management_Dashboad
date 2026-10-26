@@ -114,16 +114,7 @@ export default function Analytics() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
       {/* Top Banner & Export */}
-      <div
-        className="card"
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '16px',
-        }}
-      >
+      <div className="card filter-action-bar">
         <div>
           <h2 style={{ fontSize: '1.25rem', margin: '0 0 4px' }}>Analytics & Productivity Reports</h2>
           <p style={{ fontSize: '0.825rem', color: 'var(--text-muted)', margin: 0 }}>
@@ -131,10 +122,9 @@ export default function Analytics() {
           </p>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+        <div className="action-group">
           <select
             className="select"
-            style={{ width: 'auto' }}
             value={timeRange}
             onChange={(e) => setTimeRange(e.target.value)}
           >
@@ -146,7 +136,7 @@ export default function Analytics() {
 
           {hasData && (
             <button className="btn btn-primary" onClick={exportToCSV}>
-              <Download size={15} /> Export CSV Report
+              <Download size={15} /> <span>Export CSV Report</span>
             </button>
           )}
         </div>
